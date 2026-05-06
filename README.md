@@ -1,4 +1,4 @@
-# The Cost of Change: Tracking Treatment Duration Through a 2025 Facility Reorganization
+# Time in Treatment: Tracking Treatment Duration Through a 2025 Facility Reorganization
 
 ## 1. Research Question
 

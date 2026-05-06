@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>The Cost of Change&colon; Tracking Treatment Duration Through a 2025 Facility Reorganization</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="the-cost-of-change-tracking-treatment-duration-through-a-2025-facility-reorganization">The Cost of Change: Tracking Treatment Duration Through a 2025 Facility Reorganization</h1>
+<h2 id="1-research-question">1. Research Question</h2>
+<p><em>What are you investigating, and why does it matter?</em></p>
+<p>Wayside Recovery is a grant funded substance use treatment service provider located in the Twin Cities. In August 2025 it went through a re-organization due to budget cuts. Leadership is interested in how this organizational change has impacted client experience.</p>
+<p>The overall question is: Did the re-organization have an impact on the length of time clients stay in the program?</p>
+<p>More specifically: Is there a difference between the median and average length of stay for successful and non-successful discharges in the six months before versus six months after the re-organization?</p>
+<h2 id="2-hypothesis">2. Hypothesis</h2>
+<p><em>State your null and alternative hypotheses clearly and succinctly.</em></p>
+<p><strong>Null hypothesis:</strong>
+- There is no change in the length of stay for successful vs non-successful discharges between the six month period before and after the re-organization</p>
+<p><strong>Alternative hypothesis:</strong>
+- There is a change in the length of stay for successful vs non-successful discharges between the period before and after the re-organization.</p>
+<h2 id="3-data-description">3. Data Description</h2>
+<p><em>Describe your data source(s):</em></p>
+<p><em>* Where it comes from (URL, API, dataset name)</em>
+<em>* What each observation represents (unit of analysis)</em>
+<em>* Number of observations and key variables</em>
+<em>* Any filtering, cleaning, or transformation steps</em></p>
+<p>The data is from an electronic health record (EHR) system where discharge summaries are created and stored for each individual that leaves the program. Any information that could be used to identify individual clients has been stripped.</p>
+<p>Each observation represents a single treatment episode. There are clients that return to treatment multiple times due to the nature of substance use disorder. This analysis will take reoccurring clients into account by treating the subject ID as the grouping variable for the permutation test.</p>
+<p>The total number of observations (n=243) include clients that have discharged from the program between March 2025 and February 2026. This allows for an equal 6 month comparison window surrounding the reorganization that occurred at the end of August 2025. The first period will include clients that discharged between March 1st, 2025 and August 31st, 2025. The second period includes clients that discharged between September 1st, 2025 and February 28th, 2026.</p>
+<p><strong>Key variables:</strong></p>
+<ul>
+<li>Subject ID (original identifiers have been replaced with synthetic subject IDs to protect client privacy)</li>
+<li>Reason for discharge:
+<ul>
+<li>Completed Program</li>
+<li>Patient left without staff approval</li>
+<li>Patient conduct (behavioral)</li>
+<li>Transferred to another program</li>
+<li>Other
+<ul>
+<li>The frequency of the &quot;Transfer&quot; and &quot;Other&quot; categories is low, so only &quot;completed&quot;, &quot;left without staff approval&quot;, and &quot;behavioral&quot; discharges will be included in the analysis.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Discharge Type (assigned based on 'Reason for Discharge')
+<ul>
+<li>Successful: includes clients marked as &quot;completed Program&quot;</li>
+<li>Unsuccessful: includes clients in the &quot;patient left without staff approval&quot; and &quot;patient conduct (behavioral)&quot;</li>
+</ul>
+</li>
+<li>Intake date</li>
+<li>Discharge date</li>
+<li>Period (assigned based on discharge date)
+<ul>
+<li>Before = 6 month period before reorg</li>
+<li>After = 6 month period after reorg</li>
+</ul>
+</li>
+<li>Length of stay (calculated column)
+<ul>
+<li>This is calculated as discharge date minus intake date PLUS one. This is done in the residential treatment setting as the client receives services the day they arrive on site.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-methods">4. Methods</h2>
+<p><em>Summarize how you analyzed the data:</em></p>
+<p><em>* The test statistic for your permutation test</em>
+<em>* How you simulated or resampled under the null hypothesis</em>
+<em>* The metric(s) for which you created bootstrap confidence intervals</em>
+<em>* Why the CLT does not apply to at least one metric</em></p>
+<p>The analysis divided the episodes by each discharge type (successful vs non-successful). The test statistic for the permutation test is the difference in the average and median length of stay in the period before the reorganization minus the average length of stay after the reorganization within each discharge category.</p>
+<p>To sample under the null hypothesis, the period labels are shuffled by switching up the Subject IDs. This grouped approach ensures that the non-independence for clients who return to treatment is preserved throughout the analysis. With the grouped approach, if a client has multiple treatment episodes they are grouped together in the permutation and assigned the same period.</p>
+<p>Uncertainty is calculated with the Standard Error of the Difference formula for the permuations tests related to means. Bootstrap confidence intervals (95%) will be used to determine uncertainty for permutation tests related to medians. The metric is the difference in median length of stay between the 6 months before and after the reorganization. CLT does not apply to the median because it is not a proportion.</p>
+<h2 id="5-results">5. Results</h2>
+<p><em>Present your main findings:</em></p>
+<p><em>* Key summary statistics and visualizations</em>
+<em>* Observed test statistic and p-value (if applicable)</em>
+<em>* Bootstrap confidence intervals for relevant metrics</em></p>
+<p>The results of the permutation analysis suggest that the re-organization has not yet produced a statistically significant change in the Length of Stay (LOS) for either successful or unsuccessful discharges. Across all four tests, the data consistently failed to reject the null hypothesis at the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha = 0.05</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.05</span></span></span></span> level, largely due to high variability within the population.</p>
+<h3 id="mean-length-of-stay-permutations-1--2">Mean Length of Stay (Permutations #1 &amp; #2)</h3>
+<p>These tests evaluated the change in the average length of stay in the period before vs the period after the re-organization. While the &quot;Successful&quot; group showed stability, the &quot;Unsuccessful&quot; group exhibited a visible, though non-significant, trend.</p>
+<p><img src="file:///c:\Users\tessn\SEIS631\Residential-SUD-Discharge-Analysis\image.png" alt="alt text"> <img src="file:///c:\Users\tessn\SEIS631\Residential-SUD-Discharge-Analysis\image-1.png" alt="alt text"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Group</th>
+<th style="text-align:left">Test Stat (Mean Difference)</th>
+<th style="text-align:left">Observed Value</th>
+<th style="text-align:left">p-value</th>
+<th style="text-align:left">Uncertainty (SE of Difference)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Successful</td>
+<td style="text-align:left"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><mi>B</mi></msub><mo>−</mo><msub><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">\overline{X}_{B} - \overline{X}_{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span><span style="top:-3.8033em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span><span style="top:-3.8033em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></td>
+<td style="text-align:left">0.31 days</td>
+<td style="text-align:left">0.945</td>
+<td style="text-align:left">±4.08</td>
+</tr>
+<tr>
+<td style="text-align:left">Unsuccessful</td>
+<td style="text-align:left"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><mi>B</mi></msub><mo>−</mo><msub><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">\overline{X}_{B} - \overline{X}_{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span><span style="top:-3.8033em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span><span style="top:-3.8033em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></td>
+<td style="text-align:left">4.11 days</td>
+<td style="text-align:left">0.181</td>
+<td style="text-align:left">±3.05</td>
+</tr>
+</tbody>
+</table>
+<h3 id="median-length-of-stay-permutations-3--4">Median Length of Stay (Permutations #3 &amp; #4)</h3>
+<p>Switching to medians revealed larger absolute differences (6 days for both groups), but the high &quot;noise&quot; and wide confidence intervals prevented these findings from reaching statistical significance.</p>
+<p><img src="file:///c:\Users\tessn\SEIS631\Residential-SUD-Discharge-Analysis\image-2.png" alt="alt text"> <img src="file:///c:\Users\tessn\SEIS631\Residential-SUD-Discharge-Analysis\image-3.png" alt="alt text"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Group</th>
+<th style="text-align:left">Test Stat (Median Difference)</th>
+<th style="text-align:left">Observed Value</th>
+<th style="text-align:left">p-value</th>
+<th style="text-align:left">Uncertainty (Bootstrapped CI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Successful</td>
+<td style="text-align:left"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover accent="true"><mi>x</mi><mo>~</mo></mover><mi>B</mi></msub><mo>−</mo><msub><mover accent="true"><mi>x</mi><mo>~</mo></mover><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">\tilde{x}_{B} - \tilde{x}_{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8179em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">~</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8179em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">~</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></td>
+<td style="text-align:left">6 days</td>
+<td style="text-align:left">0.239</td>
+<td style="text-align:left">[-13.00, 6.02] days</td>
+</tr>
+<tr>
+<td style="text-align:left">Unsuccessful</td>
+<td style="text-align:left"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover accent="true"><mi>x</mi><mo>~</mo></mover><mi>B</mi></msub><mo>−</mo><msub><mover accent="true"><mi>x</mi><mo>~</mo></mover><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">\tilde{x}_{B} - \tilde{x}_{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8179em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">~</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8179em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">~</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></td>
+<td style="text-align:left">6 days</td>
+<td style="text-align:left">0.181</td>
+<td style="text-align:left">[-2.00, 11.00] days</td>
+</tr>
+</tbody>
+</table>
+<h3 id="overall-findings">Overall Findings</h3>
+<ul>
+<li>
+<p>Stability in Success: For successful discharges, the mean length of stay is essentially unchanged (0.31-day difference). The larger 6-day median difference suggests that while the &quot;average&quot; is stable, the &quot;typical&quot; patient experience may be shifting, though high variance currently masks this.</p>
+</li>
+<li>
+<p>Variability in Unsuccessful Discharges: Both mean (4.11 days) and median (6 days) tests for unsuccessful discharges show larger shifts than the successful group. However, the wide confidence intervals in these tests indicate that this population has high inherent variability, making it difficult to attribute changes specifically to the re-organization.</p>
+</li>
+<li>
+<p>Conclusion: The re-organization has not significantly altered length of stay. The observed differences—particularly the 4.11 to 6-day shifts—likely represent &quot;noise&quot; or a &quot;non-significant trend&quot; that may require a larger sample size or a longer observation period to validate.</p>
+</li>
+</ul>
+<h2 id="6-uncertainty-estimation">6. Uncertainty Estimation</h2>
+<p><em>Discuss your resampling results:</em></p>
+<p><em>* How many resamples you used</em>
+<em>* What the bootstrap or randomization distributions looked like</em>
+<em>* How you interpret the interval estimates</em></p>
+<ul>
+<li>
+<p><strong>Resampling:</strong> The analysis used 1,000 permutations for each test statistic. The null distribution was created by shuffling the &quot;Period&quot; labels (Before vs. After) across unique subject IDs. This approach maintains the exchangeability of the data while accounting for potential clustering within treatment episodes, ensuring that the resulting p-values are not deflated by clients who come back for additional treatment.</p>
+</li>
+<li>
+<p><strong>Distribution Shape:</strong> The permutation distribution for the mean differences was nearly symmetric with a bell-shaped curve, while the distribution of the median permutation appeared bi-modal and segmented. The difference in the shapes of the mean and median permutation distributions are due to the Central Limit Theorem applying to permutations for means.</p>
+</li>
+<li>
+<p><strong>Interval Estimates:</strong></p>
+<ul>
+<li>The Standard Error of the mean difference was used for the first two permutations.
+<ul>
+<li>The width of the interval was smaller for the permutation for successful discharges than the permutation for unsuccessful discharges. This means that there was less variability in discharge timeline for successful discharges.</li>
+<li>The observed value for successful discharges fell within the first standard deviation, but for unsuccessful discharges the observed value was above the upper bound of the interval. This suggests that a change in length of stay for unsuccessful discharges has occured due to the re-organization, but it is not yet significant. On the other hand, the length of stay for successful discharges has not changed very much.</li>
+</ul>
+</li>
+<li>Bootstrapped confidence intervals were utilized to determine uncertainty for the difference in medians between the groups.
+<ul>
+<li>The width of the confidence intervals were wide for both the successful and unsuccessful groups. This indicates a high level of noise present in the underlying population and  suggests that the observed differences are due to roise rather than the re-organization.</li>
+<li>Additionally, both observed differences in median length of stay fell within the 95% CI.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-limitations">7. Limitations</h2>
+<p><em>Briefly note any limitations in data, assumptions, or methods, including sources of bias or missing data.</em></p>
+<ul>
+<li>Mixed-exposure bias: Because this analysis focused on the clients that discharged in the 6 months before and after the reorganization, some of the clients included in the &quot;after&quot; phase were on site in the &quot;before&quot; phase.</li>
+<li>Residual interdependence: Even with the grouped permutation test, treatment episodes are not truly independent and are influenced by many factors.</li>
+<li>Right-Censoring: There is some right-censoring at the end of the after period because clients that admitted during the period but did not discharge until after the end date were not included. The mean and median length of stay for the &quot;after&quot; period are slightly underestimated due to this.</li>
+<li>Selection Bias: Because &quot;transfer&quot; and &quot;other&quot; discharge types were excluded; and &quot;left without staff approval&quot; and &quot;patient conduct&quot; were grouped together, this analysis is only generalizable to successful vs unsuccessful discharges.</li>
+<li>Confounding variables: the length of stay may have changed due to changes external to Wayside. For example, Operation Metro Surge occurred in the &quot;after&quot; phase which also could have plausibly affected the amount of time clients stayed on site.</li>
+</ul>
+<h2 id="8-references">8. References</h2>
+<p><em>List all datasets, tools, libraries, or papers you cited.</em></p>
+<p>Data source:</p>
+<ul>
+<li>Internal EHR data from Wayside Recovery</li>
+</ul>
+<p>Software/Libraries:</p>
+<ul>
+<li>Python</li>
+<li>Pandas</li>
+<li>Matplotlib/Seaborn</li>
+<li>NumPy</li>
+</ul>
+<hr>
+<p><strong>Reminder:</strong> Your README should be clear enough that someone unfamiliar with your work could understand what you studied, how you analyzed it, and what you found.</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
