@@ -3,25 +3,42 @@ THIS ISNT THE FINAL VERSION YET! Thought I was  going to present on 5/6, then di
 # Time in Treatment: Tracking Treatment Duration Through a 2025 Facility Reorganization
 
 ## At a glance: 
-In late 2025, Wayside Recovery navigated a reorganization driven by federal funding shifts and industry wide staffing challenges. This analysis evaluates whether this period of change impacted the **Length of Stay**, a primary indicator of treatment stability for women in residential care.
+In late 2025, Wayside Recovery navigated a reorganization driven by federal funding shifts and industry wide staffing challenges. This analysis evaluates whether this period of change impacted the **length of stay**, a primary indicator of treatment stability for women in residential care.
 
 By applying grouped permutation testing to 243 treatment episodes, this analysis accounts for the non-independence of returning clients to provide a statistical comparison of the six months before and after the transition. The findings reveal resilience: despite significant organizational upheaval, client time in treatment remained statistically stable.
 
-## The Why
+## Context & Project Motivation
+### About Wayside Recovery
+Wayside Recovery is a Minnesota-based provider of co-occurring substance use treatment specifically tailored for women. Its Women’s Treatment Center (WTC) operates as a no-refusal program, ensuring access to recovery regardless of a client's ability to pay.
 
-Wayside Recovery is a Minnesota based co-occuring substance use treatment provider that has programming specifically tailored to women. The Residential Womens Treatment Center (WTC) is a *no-refusal* program, meaning that everyone has a chance at recovery regardless of their ability to pay. Wayside is in a special position to provide these critical services to those with or without insurance through government grants, private foundations, and individual donors. This funding also allows us to provide mental health services, targeted case management, peer recovery supports, and family reunification assistance. 
+ - **Services Provided:** Co-occurding recovery treatment model, mental health care, targeted case management, peer recovery support, and family reunification assistance.
 
-Because of the changes in the federal government and the scruity Minnesota's Department of Human Services (MN DHS) is under, a significant portion of our funding is at risk. In Janurary of 2026 our largest federal grant was nearly terminated. There is a link to a NPR article at the end of this README covering this. The decision to terminate the grant was reversed, but it was another reminder that the landscape of government grants is constantly changing. 
+ - **Funding Model:** A complex mix of government grants, private foundations, insurance, and individual donors.
 
-There has been slow and painful reductions in the amount of state and federal funding available over the past few years. Additionally, insurance reimbursement rates have been slow to increase with the rising cost of program expenses. In **August 2025** Wayside leadship needed to re-organize the staffing structure in order to survive. Staffing was reduced across the board, and significant changes, both internal and external, fueled a drop in staff retention. This left WTC short staffed for about four months and limited the number of clients served.
+ - **The Mission:** "Breaking the cycle of addiction & trauma for women and their children."
 
-  **Our Mission: "Breaking the cycle of addiction & trauma for women and their children."**
+### The 2025 Reorganization
+The landscape for government funding in Minnesota has become increasingly volatile, with shrinking federal grants and stagnant insurance reimbursement rates.
 
-The program is evolving and adapting. It is now fully staffed. We have added on-site Medicated Assisted Treatment (MAT) options so clients no longer need to go off site to get these services. Additional mental health and mutual support groups have been introduced. Family activities are starting back up again and mothers can have CPS visitations on site. 
+ - **August 2025:** Faced with rising operational costs, leadership initiated a survival-driven staffing reorganization.
 
-March 2026 marked 6 months since the re-organization occured. Clients stay in residential treatment for 40-60 days, so there was enough discharge data when embarking on this project to possibly see the effect of the re-organization. The file *Discharge_Hypothesis_6mo.ipynb* holds this analysis. I have also included an update with the most recent available discharge data in *Discharege_hypothesis_8mo.ipynb*
+ - **The Impact:** Staffing reductions led to a drop in retention, leaving the WTC short-staffed for approximately four months and limiting intake capacity.
 
-The length of stay is a key variable for this analysis. Typically when evaluating a program the focus is on the percent of beds filled or the porportion of successful discharges. While these metrics tell us what is happening, using length of stay pinpoints when a programmatic issue is occuring. For example, if unsuccessful discharges spike near the end of treatment, leadership can implement targeted interventions to better support clients during that phase of care.
+### Current Status (March 2026)
+Six months after the reorganization, the program has successfully adapted and evolved:
+
+ - **Fully Staffed:** Return to standard operational capacity.
+
+ - **Enhanced Services:** Added on-site Medicated Assisted Treatment (MAT), expanded mental health groups, and resumed family/CPS visitations.
+
+### Why Length of Stay (LOS) Matters
+While standard evaluations often focus on "beds filled" or "success rates," this analysis focuses on Length of Stay as the primary health metric.
+
+ - **The Problem with Volume Metrics:** High occupancy tells us that a program is full, but it doesn't reveal the quality or stability of the treatment.
+
+ -  **Value of Length of Stay:** Pinpointing exactly when clients leave allows leadership to implement targeted interventions. For example, if spikes in unsuccessful discharges occur at day 30, it indicates a need for increased support during that specific phase of care.
+
+This project examines if the 2025 reorganization fundamentally shifted these treatment timelines
 
 ## Research Question
 
@@ -84,9 +101,33 @@ To sample under the null hypothesis, the period labels are shuffled by switching
 
 Uncertainty is calculated with the **Standard Error of the Difference** formula for the permuations tests related to means. **Bootstrap confidence intervals (95%)** will be used to determine uncertainty for permutation tests related to medians. The metric is the difference in median length of stay between the 6 months before and after the reorganization. CLT does not apply to the median because it is not a proportion. 
 
+To evaluate the impact of the reorganization, the analysis utilizes a non-parametric permutation test strategy. This approach avoids the assumptions of normality required by standard t-tests. This was an essential choice given that length of stay data is frequently skewed.
+ 1. **Comparison Groups:** 
+   The analysis segments treatment episodes into two primary categories to ensure a like-for-like comparison:
+    - Successful Discharges: Clients who completed the program.
+    - Unsuccessful Discharges: A combined group including "Patient left without staff approval" and "Patient conduct."
+ 2. **Test Statistics:**
+   For each discharge category, the following test statistics were calculated to measure the shift between the 6-month periods:
+    - Difference in Means: 
+      - $\Delta\overline{x} = \overline{x}_{\text{Before}} - \overline{x}_{\text{After}}$
+    - Difference in Medians: 
+      - $\Delta\tilde{x} = \tilde{x}_{\text{Before}} - \tilde{x}_{\text{After}}$
+ 3. **Grouped Permutation Approach:**
+   To accurately sample under the Null Hypothesis (assuming that the reorganization had no effect), the analysis utilizes Grouped Permutation
+      - *Technical Note on Independence:* Because some clients return to treatment multiple times, individual treatment episodes are not truly independent. To maintain statistical integrity, Subject ID is used as the grouping variable during the shuffle.
+      - **Process:** During each permutation, all episodes belonging to a single Subject ID are kept together and assigned the same "Period" label (Before or After).
+      - **Benefit:** This preserves the non-independence of recurring clients, preventing inflated Type I errors and ensuring the resulting p-values are robust and defensible.
+ 4. **Uncertainty Estimation**
+   Because means and medians have different mathematical properties, two distinct methods were used to calculate uncertainty:
+    | Metric | Uncertainty Measure |  Reasoning | 
+    |:---------------|:--------------|:---------------|
+    | Means | Standard Error (SE) of the Difference | The permutation distribution for the mean is nearly symmetric and bell-shaped, allowing for SE calculations. |
+    | Medians | 95% Bootstrap Confidence Intervals | The Central Limit Theorem (CLT) does not apply to medians. Bootstrapping provides a more reliable estimation of uncertainty for this non-proportional metric. |
+
+
 ## Results
 
-The results of the permutation analysis suggest that the re-organization has not yet produced a statistically significant change in the Length of Stay (LOS) for either successful or unsuccessful discharges. Across all four tests, the data consistently failed to reject the null hypothesis at the $\alpha = 0.05$ level, largely due to high variability within the population.
+The results of the permutation analysis suggest that the re-organization has not yet produced a statistically significant change in the length of stay for either successful or unsuccessful discharges. Across all four tests, the data consistently failed to reject the null hypothesis at the $\alpha = 0.05$ level, largely due to high variability within the population.
 
 ### Mean Length of Stay (Permutations #1 & #2)
 These tests evaluated the change in the average length of stay in the period before vs the period after the re-organization. While the "Successful" group showed stability, the "Unsuccessful" group exhibited a visible, though non-significant, trend.
@@ -95,8 +136,8 @@ These tests evaluated the change in the average length of stay in the period bef
 
 | Group | Test Stat (Mean Difference) | Observed Value |  p-value | Uncertainty (SE of Difference) |
 |:---------------|:--------------|:---------------|:---------------|:---------------|
-| Successful | $$\overline{X}_{B} - \overline{X}_{A}$$ | 0.31 days | 0.945 | ±4.08 |
-| Unsuccessful | $$\overline{X}_{B} - \overline{X}_{A}$$ | 4.11 days | 0.181 | ±3.05 |
+| Successful | Mean(before) - Mean(after) | 0.31 days | 0.945 | ±4.08 |
+| Unsuccessful | Mean(before) - Mean(after) | 4.11 days | 0.181 | ±3.05 |
 
 
 ### Median Length of Stay (Permutations #3 & #4)
@@ -106,8 +147,8 @@ Switching to medians revealed larger absolute differences (6 days for both group
 
 | Group | Test Stat (Median Difference) | Observed Value |  p-value | Uncertainty (Bootstrapped CI) |
 |:---------------|:--------------|:---------------|:---------------|:---------------|
-| Successful | $\tilde{x}_{B} - \tilde{x}_{A}$ | 6 days | 0.239 | [-13.00, 6.02] days |
-| Unsuccessful | $\tilde{x}_{B} - \tilde{x}_{A}$ | 6 days | 0.181 | [-2.00, 11.00] days |
+| Successful | Median(*before*) - Median(*after*) | 6 days | 0.239 | -13.00, 6.02 days |
+| Unsuccessful | Median(*before*) - Median(*after*) | 6 days | 0.181 | -2.00, 11.00 days |
 
 ### Overall Findings
  - **Stability in Success:** For successful discharges, the mean length of stay is essentially unchanged (0.31-day difference). The larger 6-day median difference suggests that while the "average" is stable, the "typical" patient experience may be shifting, though high variance currently masks this.
@@ -117,13 +158,13 @@ Switching to medians revealed larger absolute differences (6 days for both group
  - **Conclusion:** The re-organization has not significantly altered length of stay. The observed differences—particularly the 4.11 to 6-day shifts—likely represent "noise" or a "non-significant trend" that may require a larger sample size or a longer observation period to validate.
 
 ### What This Means for Wayside
-The past year (3/1/25-2/28/26) has been one of significant chaos: navigating funding threats, federal scrutiny, and a major internal restructuring. This goal of this analysis to see if the August 2025 reorganization fundamentally changed how long women stay in our care.
+The past year (3/1/25-2/28/26) has been one of significant change: navigating funding threats, federal scrutiny, and a major internal restructuring. This goal of this analysis to see if the August 2025 reorganization fundamentally changed how long women stay in our care.
 
 **The Bottom Line**:
 
 Wayside is holding steady. Despite the reduction in staffing and the stress of the reorganization, there hasn't been a drastic or "statistically clear" shift in the length of time clients stay in the program. Whether a client completes the program or leaves early, the timeline has remained relatively consistent with where it was before the changes. In this case, a non-significant result was a positive indicator.
 
-Success remains stable. For women who successfully complete the program, their length of stay is almost identical to before the restructuring. This suggests that even with a leaner team  the time spent healing on-site hasn't been diluted.
+Success remains stable. For women who successfully complete the program, their length of stay is almost identical to before the restructuring. This suggests that even with a leaner team  the time spent healing on-site hasn't significantly changed.
 
 **The "Noise" in the data:** While there was a 4 to 6 day difference in some areas (specifically for those who leave early), we can’t yet say for sure if that was caused by the reorganization. In a program like WTC, client stays vary naturally from month to month. Right now, those 4–6 days are considered "noise" - meaning they could just be normal, unpredictable fluctuations rather than a direct result of staffing changes.
 
