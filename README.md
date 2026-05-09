@@ -3,9 +3,9 @@ THIS ISNT THE FINAL VERSION YET! Thought I was  going to present on 5/6, then di
 # Time in Treatment: Tracking Treatment Duration Through a 2025 Facility Reorganization
 
 ## At a glance: 
-In late 2025, Wayside Recovery navigated a high-stakes reorganization driven by federal funding shifts and industry-wide staffing challenges. This analysis evaluates whether this period of "chaos" impacted the Length of Stay (LOS)—a primary indicator of treatment stability—for women in residential care.
+In late 2025, Wayside Recovery navigated a reorganization driven by federal funding shifts and industry wide staffing challenges. This analysis evaluates whether this period of change impacted the **Length of Stay**, a primary indicator of treatment stability for women in residential care.
 
-By applying grouped permutation testing to 243 treatment episodes, this project accounts for the non-independence of returning clients to provide a rigorous statistical comparison of the six months before and after the transition. The findings reveal programmatic resilience: despite significant organizational upheaval, client time-in-treatment remained statistically stable, successfully preserving the "dose" of care essential to Wayside's mission.
+By applying grouped permutation testing to 243 treatment episodes, this analysis accounts for the non-independence of returning clients to provide a statistical comparison of the six months before and after the transition. The findings reveal resilience: despite significant organizational upheaval, client time in treatment remained statistically stable.
 
 ## The Why
 
@@ -13,13 +13,13 @@ Wayside Recovery is a Minnesota based co-occuring substance use treatment provid
 
 Because of the changes in the federal government and the scruity Minnesota's Department of Human Services (MN DHS) is under, a significant portion of our funding is at risk. In Janurary of 2026 our largest federal grant was nearly terminated. There is a link to a NPR article at the end of this README covering this. The decision to terminate the grant was reversed, but it was another reminder that the landscape of government grants is constantly changing. 
 
-There has been slow and painful reductions in the amount of state and federal funding available over the past few years. Additionally, insurance reimbursement rates have been slow to increase with the rising cost of program expenses. In **August 2025** Wayside leadship needed to re-organize the staffing structure in order to survive. Staffing was reduced across the board, and significant changes, both internal and external, fueled a drop in staff retention. This left WTC short staffed for about four months and limited the number of clients we could intake.
+There has been slow and painful reductions in the amount of state and federal funding available over the past few years. Additionally, insurance reimbursement rates have been slow to increase with the rising cost of program expenses. In **August 2025** Wayside leadship needed to re-organize the staffing structure in order to survive. Staffing was reduced across the board, and significant changes, both internal and external, fueled a drop in staff retention. This left WTC short staffed for about four months and limited the number of clients served.
 
   **Our Mission: "Breaking the cycle of addiction & trauma for women and their children."**
 
 The program is evolving and adapting. It is now fully staffed. We have added on-site Medicated Assisted Treatment (MAT) options so clients no longer need to go off site to get these services. Additional mental health and mutual support groups have been introduced. Family activities are starting back up again and mothers can have CPS visitations on site. 
 
-March 2026 marked 6 months since the re-organization occured. Clients stay in residential treatment for 40-60 days, so I had enough discharge data when embarking on this project to possibly see the effect of the re-organization. The file *Discharge_Hypothesis_6mo.ipynb* holds this analysis. I have also included an update with the most recent available discharge data in *Discharege_hypothesis_8mo.ipynb*
+March 2026 marked 6 months since the re-organization occured. Clients stay in residential treatment for 40-60 days, so there was enough discharge data when embarking on this project to possibly see the effect of the re-organization. The file *Discharge_Hypothesis_6mo.ipynb* holds this analysis. I have also included an update with the most recent available discharge data in *Discharege_hypothesis_8mo.ipynb*
 
 The length of stay is a key variable for this analysis. Typically when evaluating a program the focus is on the percent of beds filled or the porportion of successful discharges. While these metrics tell us what is happening, using length of stay pinpoints when a programmatic issue is occuring. For example, if unsuccessful discharges spike near the end of treatment, leadership can implement targeted interventions to better support clients during that phase of care.
 
@@ -71,7 +71,7 @@ The total number of observations (n=243) include clients that have discharged fr
    - After = 6 month period after reorg
  - Length of stay 
    - *calculated column*
-   - This is calculated as discharge date minus intake date PLUS one. This is done in the residential treatment setting as the client receives services the day they arrive on site.
+   - Calculated as discharge date minus intake date PLUS one. This is done in the residential treatment setting as the client receives services the day they arrive on site.
 
 
 ##  Methods
@@ -95,8 +95,8 @@ These tests evaluated the change in the average length of stay in the period bef
 
 | Group | Test Stat (Mean Difference) | Observed Value |  p-value | Uncertainty (SE of Difference) |
 |:---------------|:--------------|:---------------|:---------------|:---------------|
-| Successful | $\overline{X}_{B} - \overline{X}_{A}$ | 0.31 days | 0.945 | ±4.08 |
-| Unsuccessful | $\overline{X}_{B} - \overline{X}_{A}$ | 4.11 days | 0.181 | ±3.05 |
+| Successful | $$\overline{X}_{B} - \overline{X}_{A}$$ | 0.31 days | 0.945 | ±4.08 |
+| Unsuccessful | $$\overline{X}_{B} - \overline{X}_{A}$$ | 4.11 days | 0.181 | ±3.05 |
 
 
 ### Median Length of Stay (Permutations #3 & #4)
