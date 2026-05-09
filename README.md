@@ -1,5 +1,3 @@
-THIS ISNT THE FINAL VERSION YET! Thought I was  going to present on 5/6, then didn't. I will resubmit to canvas when it is completed
-
 # Time in Treatment: Tracking Treatment Duration Through a 2025 Facility Reorganization
 
 ## At a glance: 
