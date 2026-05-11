@@ -22,15 +22,15 @@ The landscape for government funding in Minnesota has become increasingly volati
 
  - **The Impact:** Staffing reductions led to a drop in retention, leaving the WTC short-staffed for approximately four months and limiting intake capacity.
 
-### Current Status (March 2026)
+### Current Status (April 2026)
 Six months after the reorganization, the program has successfully adapted and evolved:
 
  - **Fully Staffed:** Return to standard operational capacity.
 
- - **Enhanced Services:** Added on-site Medicated Assisted Treatment (MAT), expanded mental health groups, and resumed family/CPS visitations.
+ - **Enhanced Services:** Added on-site Medicated Assisted Treatment (MAT), expanded mental health groups, and resumed family involvement in treatment services
 
-### Why Length of Stay (LOS) Matters
-While standard evaluations often focus on "beds filled" or "success rates," this analysis focuses on Length of Stay as the primary health metric.
+### Why Length of Stay Matters
+While standard evaluations for SUD treatment often focus on "beds filled" or "success rates," this analysis focuses on Length of Stay as the primary health metric.
 
  - **The Problem with Volume Metrics:** High occupancy tells us that a program is full, but it doesn't reveal the quality or stability of the treatment.
 
@@ -61,9 +61,9 @@ Each observation represents a single treatment episode. There are clients that r
 
 The total number of observations (n=243) include clients that have discharged from the program between **March 2025** and **February 2026.** This allows for an equal 6 month comparison window surrounding the reorganization that occurred at the end of **August 2025**.
 
- - **First period:** clients that discharged between March 1st, 2025 and August 31st, 2025.
+ - **First period (Before):** clients that discharged between March 1st, 2025 and August 31st, 2025.
 
- - **Second period:** clients that discharged between September 1st, 2025 and February 28th, 2026.
+ - **Second period (After):** clients that discharged between September 1st, 2025 and February 28th, 2026.
 
 **Key variables:**
  - Subject ID (original identifiers have been replaced with synthetic subject IDs to protect client privacy)
@@ -91,15 +91,8 @@ The total number of observations (n=243) include clients that have discharged fr
 
 ##  Methods
 
-The analysis divided the episodes by each discharge type (successful vs non-successful). 
+To evaluate the impact of the reorganization, the analysis utilizes a non-parametric permutation test strategy. This approach avoids the assumptions of normality required by standard t-tests. This was an essential choice given that length of stay data is skewed.
 
-The test statistic for the permutation test is the difference in the average and median length of stay in the period before the reorganization minus the average length of stay after the reorganization within each discharge category.
-
-To sample under the null hypothesis, the period labels are shuffled by switching up the **Subject IDs.** This grouped approach ensures that the non-independence for clients who return to treatment is preserved throughout the analysis. With grouping, if a client has multiple treatment episodes they stick together throughout permutation and assigned the same period when shuffled. 
-
-Uncertainty is calculated with the **Standard Error of the Difference** formula for the permuations tests related to means. **Bootstrap confidence intervals (95%)** will be used to determine uncertainty for permutation tests related to medians. The metric is the difference in median length of stay between the 6 months before and after the reorganization. CLT does not apply to the median because it is not a proportion. 
-
-To evaluate the impact of the reorganization, the analysis utilizes a non-parametric permutation test strategy. This approach avoids the assumptions of normality required by standard t-tests. This was an essential choice given that length of stay data is frequently skewed.
  1. **Comparison Groups:** 
    The analysis segments treatment episodes into two primary categories to ensure a like-for-like comparison:
     - Successful Discharges: Clients who completed the program.
@@ -155,20 +148,6 @@ Switching to medians revealed larger absolute differences (6 days for both group
 
  - **Conclusion:** The re-organization has not significantly altered length of stay. The observed differences—particularly the 4.11 to 6-day shifts—likely represent "noise" or a "non-significant trend" that may require a larger sample size or a longer observation period to validate.
 
-### What This Means for Wayside
-The past year (3/1/25-2/28/26) has been one of significant change: navigating funding threats, federal scrutiny, and a major internal restructuring. This goal of this analysis to see if the August 2025 reorganization fundamentally changed how long women stay in our care.
-
-**The Bottom Line**:
-
-Wayside is holding steady. Despite the reduction in staffing and the stress of the reorganization, there hasn't been a drastic or "statistically clear" shift in the length of time clients stay in the program. Whether a client completes the program or leaves early, the timeline has remained relatively consistent with where it was before the changes. In this case, a non-significant result was a positive indicator.
-
-Success remains stable. For women who successfully complete the program, their length of stay is almost identical to before the restructuring. This suggests that even with a leaner team  the time spent healing on-site hasn't significantly changed.
-
-**The "Noise" in the data:** While there was a 4 to 6 day difference in some areas (specifically for those who leave early), we can’t yet say for sure if that was caused by the reorganization. In a program like WTC, client stays vary naturally from month to month. Right now, those 4–6 days are considered "noise" - meaning they could just be normal, unpredictable fluctuations rather than a direct result of staffing changes.
-
-What comes next? Because there is only six months of "after" data in this analysis, continuous monitioring is still needed. As more women graduate from the now fully-staffed program, we will get a clearer picture of whether these small trends turn into real, lasting changes.
-
-**In short:** The reorganization was a survival necessity, and so far, the data suggests that Wayside has managed to protect the time in treatment for the women we serve, maintaining our mission even through a period of intense transition.
 
 ## Uncertainty Estimation
 
@@ -177,11 +156,13 @@ What comes next? Because there is only six months of "after" data in this analys
  - **Distribution Shape:** The permutation distribution for the mean differences was nearly symmetric with a bell-shaped curve, while the distribution of the median permutation appeared bi-modal and segmented. The difference in the shapes of the mean and median permutation distributions are due to the Central Limit Theorem applying to permutations for means. 
   
  - **Interval Estimates:** 
-   - The Standard Error of the mean difference was used for the first two permutations.
+   - *The Standard Error of the mean difference* was used for the first two permutations.
      - The width of the interval was smaller for the permutation for successful discharges than the permutation for unsuccessful discharges. This means that there was less variability in discharge timeline for successful discharges.
-     - The observed value for successful discharges fell within the first standard deviation, but for unsuccessful discharges the observed value was above the upper bound of the interval. This suggests that a change in length of stay for unsuccessful discharges has occured due to the re-organization, but it is not yet significant. On the other hand, the length of stay for successful discharges has not changed very much.
-   - Bootstrapped confidence intervals were utilized to determine uncertainty for the difference in medians between the groups.
-     - The width of the confidence intervals were wide for both the successful and unsuccessful groups. This indicates a high level of noise present in the underlying population and  suggests that the observed differences are due to roise rather than the re-organization.
+     - The observed value for successful discharges fell within the first standard deviation, but for unsuccessful discharges the observed value was above the upper bound of the interval. 
+       - This suggests that a change in length of stay for unsuccessful discharges has occured due to the re-organization, but it is not yet significant. 
+       - On the other hand, the length of stay for successful discharges has not changed very much.
+   - *Bootstrapped confidence intervals (95%)* were utilized to determine uncertainty for the difference in medians between the groups.
+     - The width of the confidence intervals were wide for both the successful and unsuccessful groups. This indicates a high level of noise present in the underlying population and suggests that the observed differences are due to this noise rather than the re-organization.
      - Additionally, both observed differences in median length of stay fell within the 95% CI. 
 
 
@@ -204,5 +185,3 @@ Software/Libraries:
  - Pandas
  - Matplotlib/Seaborn
  - NumPy
-
-https://www.npr.org/2026/01/14/nx-s1-5677104/trump-administration-letter-terminating-addiction-mental-health-grants
